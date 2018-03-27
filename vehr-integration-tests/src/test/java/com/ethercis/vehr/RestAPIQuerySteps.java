@@ -29,15 +29,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public class QueryWithAqlSteps {
+public class RestAPIQuerySteps {
 
     private RestAPIBackgroundSteps bacgroundSteps;
 
-    public QueryWithAqlSteps(RestAPIBackgroundSteps pBackgroundSteps){
+    public RestAPIQuerySteps(RestAPIBackgroundSteps pBackgroundSteps){
         bacgroundSteps = pBackgroundSteps;
     }
 
-    public QueryWithAqlSteps() {
+    public RestAPIQuerySteps() {
     }
 
     @After

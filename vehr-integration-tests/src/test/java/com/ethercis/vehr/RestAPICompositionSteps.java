@@ -23,7 +23,7 @@ import static com.jayway.restassured.RestAssured.given;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-public class CompositionAPISteps {
+public class RestAPICompositionSteps {
 
     private static final String COMPOSITION_ENDPOINT = "/rest/v1/composition";
     private static final String FORMAT_RAW = "RAW";
@@ -32,7 +32,7 @@ public class CompositionAPISteps {
     private String body;
     private String compositionUid;
 
-    public CompositionAPISteps(RestAPIBackgroundSteps pBackgroundSteps){
+    public RestAPICompositionSteps(RestAPIBackgroundSteps pBackgroundSteps){
         bground = pBackgroundSteps;
     }
 

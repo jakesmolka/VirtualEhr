@@ -1,13 +1,11 @@
 # Ehrscape API - /query
 
-# [ ] POST
 # [X] GET
-# [ ] PUT
 
-Feature: Provide VEHR API access via REST calls
+Feature: Provide Query API access via REST calls
   In order to work with openEHR data
   As a client system
-  I want to make REST API calls over http
+  I want to make REST API calls over http to query
 
   Background:
   The server is ready, an EHR and a template is in place and the user is logged in.
