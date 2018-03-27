@@ -10,6 +10,8 @@ import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
 import org.junit.Assert;
 
 import java.io.File;
@@ -43,7 +45,7 @@ public class QueryWithAqlSteps {
         bacgroundSteps.launcher.stop();
     }
 
-    @And("^A composition is persisted under the EHR$")
+    @When("^A composition is persisted under the EHR$")
     public void aCompositionIsPersistedUnderTheEHR() throws Throwable {
         MakeCallToPersistComposition(true);
     }
@@ -98,7 +100,7 @@ public class QueryWithAqlSteps {
             "contains COMPOSITION a[openEHR-EHR-COMPOSITION.prescription.v1] ";
     }
 
-    @And("^A composition is persisted under the EHR without an EHR identifier$")
+    @When("^A composition is persisted under the EHR without an EHR identifier$")
     public void aCompositionIsPersistedUnderTheEHRWithoutAnEHRIdentifier() throws Throwable {
         MakeCallToPersistComposition(false);
     }

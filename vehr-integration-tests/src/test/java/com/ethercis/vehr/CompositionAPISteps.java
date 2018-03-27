@@ -75,6 +75,7 @@ public class CompositionAPISteps {
         assertNotNull(composition);
     }
 
+    // helper function for GET
     private Response getComposition(String objectId, String pContentType, String pFormat) {
         return given()
                 .header(bground.secretSessionId, bground.SESSION_ID_TEST_SESSION)
@@ -108,5 +109,26 @@ public class CompositionAPISteps {
         assertNotNull(rootNode);
         assertTrue(rootNode.getNodeName().equals("composition"));
 
+    }
+
+    @Then("^Composition id should allow deletion of composition$")
+    public void compositionIdShouldAllowDeletionOfComposition() throws Throwable {
+        String objectId = compositionUid.substring(0, compositionUid.indexOf("::"));
+
+        Response response = delComposition(objectId);
+
+        assertTrue(response.statusCode()  == 200);
+    }
+
+    // helper function for DELETE
+    private Response delComposition(String objectId) {
+        return given()
+                .header(bground.secretSessionId, bground.SESSION_ID_TEST_SESSION)
+                .when()
+                    .delete(COMPOSITION_ENDPOINT + "/" + objectId)
+                .then()
+                    .statusCode(200)
+                    .extract()
+                    .response();
     }
 }

@@ -1,3 +1,9 @@
+# Ehrscape API - /composition
+
+# [x] POST
+# [x] GET
+# [X] DELETE
+
 Feature: Provide Composition API access over REST
   As a clinical informatics actor
   In order to create, access and modify data based on openEHR compositions
@@ -24,3 +30,8 @@ Feature: Provide Composition API access over REST
     When Flat json file IDCR - Immunisation summary.v0.flat.json with template id IDCR - Immunisation summary.v0 is committed to service
     Then A composition id should be returned by the API
     And Composition id should allow retrieval of composition in xml format
+
+  Scenario: Commit composition in flat json and remove composition again
+    When Flat json file IDCR - Immunisation summary.v0.flat.json with template id IDCR - Immunisation summary.v0 is committed to service
+    Then A composition id should be returned by the API
+    And Composition id should allow deletion of composition

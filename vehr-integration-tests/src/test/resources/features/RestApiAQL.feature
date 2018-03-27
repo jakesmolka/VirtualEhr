@@ -1,3 +1,9 @@
+# Ehrscape API - /query
+
+# [ ] POST
+# [X] GET
+# [ ] PUT
+
 Feature: Provide VEHR API access via REST calls
   In order to work with openEHR data
   As a client system
