@@ -1,8 +1,9 @@
 # Ehrscape API - /ehr
 
-# [X] POST
-# [X] GET
-# [~] PUT
+# TODO: expand specification cases!
+# [X] POST ([ ] all status codes)
+# [X] GET (3 times) ([ ] all status codes)
+# [X] PUT (3 times) ([ ] all status codes)
 
 Feature: Provide EHR API access via REST calls
   In order to work with openEHR data
@@ -27,7 +28,6 @@ Feature: Provide EHR API access via REST calls
     Then Subject id should allow retrieval
 
   Scenario: (PUT EHR)
-    TODO: not working yet. Why?
     
     Given An EHR is created
     Then Ehr id should allow modifying the Ehr status

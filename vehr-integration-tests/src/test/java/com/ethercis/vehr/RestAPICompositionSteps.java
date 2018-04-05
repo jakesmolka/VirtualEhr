@@ -65,7 +65,7 @@ public class RestAPICompositionSteps {
         assertTrue(compositionUid.split("::").length == 3);
     }
 
-    @And("^Composition id should allow retrieval of composition in raw format$")
+    @Then("^Composition id should allow retrieval of composition in raw format$")
     public void compositionIdShouldAllowRetrievalOfCompositionInRawFormat() throws Throwable {
         String objectId = compositionUid.substring(0, compositionUid.indexOf("::"));
 
@@ -88,7 +88,7 @@ public class RestAPICompositionSteps {
                     .response();
     }
 
-    @And("^Composition id should allow retrieval of composition in xml format$")
+    @Then("^Composition id should allow retrieval of composition in xml format$")
     public void compositionIdShouldAllowRetrievalOfCompositionInXmlFormat() throws Throwable {
         String objectId = compositionUid.substring(0, compositionUid.indexOf("::"));
 
@@ -130,5 +130,63 @@ public class RestAPICompositionSteps {
                     .statusCode(200)
                     .extract()
                     .response();
+    }
+
+    // @Then("^Composition id should allow update of existing composition$")
+    // TODO
+
+    // TODO (POST /composition/contribution)
+
+    // TODO (POST /composition/covert/json)
+
+    @Then("^A flat json file ([a-zA-Z \\-\\.0-9]+\\.json) with template id ([a-zA-Z \\-\\.0-9]+) is converted$")
+    public void flatJsonFileIsConverted(String pTemplateFileName, String pTemplateId) throws Exception {
+        Path jsonFilePath =
+            Paths
+                .get(bground.resourcesRootPath + "test_data/" + pTemplateFileName);
+        byte[] fileContents = Files.readAllBytes(jsonFilePath);
+
+        Response response =
+            given()
+                .header(bground.secretSessionId, bground.SESSION_ID_TEST_SESSION)
+                .header(bground.CONTENT_TYPE, bground.CONTENT_TYPE_JSON)
+            .content(fileContents)
+            .when()
+                .post(COMPOSITION_ENDPOINT + "/convert/tdd" + "?format=FLAT&templateId=" + pTemplateId);
+        assertTrue(response.statusCode()  == 200);
+    }
+
+    // TODO (POST /composition/generated)
+
+    @Then("^Composition id should allow returning of composition by query$")
+    public void compositionIdShouldAllowReturningOfCompositionByQuery() throws Throwable {
+        String query = "\"SELECT c FROM COMPOSITION c WHERE c/name/value = :name\"";
+        String queryParameter = "\"IDCR - Immunisation summary.v0\"";
+
+        Response response =
+            given()
+                .header(bground.secretSessionId, bground.SESSION_ID_TEST_SESSION)
+                .header(bground.CONTENT_TYPE, bground.CONTENT_TYPE_JSON)
+            .body("{\"aql\": \""+ query +"\","
+                +"\"aqlParameter\":{\"name\":"+queryParameter+"}}")
+            .when()
+                .post(COMPOSITION_ENDPOINT + "/getByUids");
+
+        assertTrue(response.statusCode()  == 200);
+    }
+
+    @Then("^Composition id should allow returning of composition by id$")
+    public void compositionIdShouldAllowReturningOfCompositionById() throws Throwable {
+        String objectId = compositionUid.substring(0, compositionUid.indexOf("::"));
+        
+        Response response =
+            given()
+                .header(bground.secretSessionId, bground.SESSION_ID_TEST_SESSION)
+                .header(bground.CONTENT_TYPE, bground.CONTENT_TYPE_JSON)
+            .body("{\"uuids\": [\""+ objectId +"\"]}")
+            .when()
+                .post(COMPOSITION_ENDPOINT + "/getByUids");
+
+        assertTrue(response.statusCode()  == 200);
     }
 }

@@ -41,7 +41,7 @@ public class RestAPIEhrSteps {
                 .body(ehrStatus())
                 .when()
                 .put(
-                    EHR_ENDPOINT + "/status/" + "?ehrId={ehrId}"
+                    EHR_ENDPOINT + "/status/" + "{ehrId}"
                     , bground.ehrId);
         assertNotNull(response);
 

@@ -1,6 +1,14 @@
 # Ehrscape API - /query
 
-# [X] GET
+# [ ] GET (4 times) ([ ] all status codes)
+#   [ ] /query ([ ] all status codes)
+#   [ ] /query/csv ([ ] all status codes)
+#   [ ] /query/form/{name}/{version} ([ ] all status codes)
+#   [ ] /query/poll/{queryUuid} ([ ] all status codes)
+# [ ] POST (3 times) ([ ] all status codes)
+#   [ ] /query ([ ] all status codes)
+#   [ ] /query/csv ([ ] all status codes)
+#   [ ] /query/poll ([ ] all status codes)
 
 Feature: Provide Query API access via REST calls
   In order to work with openEHR data

@@ -75,6 +75,7 @@ fabric.properties
 # Sensitive or high-churn files:
 
 # Gradle:
+*.gradle
 
 # CMake
 
