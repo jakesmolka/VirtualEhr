@@ -30,42 +30,42 @@ Feature: Provide Composition API access over REST
     When Flat json file IDCR - Immunisation summary.v0.flat.json with template id IDCR - Immunisation summary.v0 is committed to service
     Then Composition id should allow deletion of composition
 
-  # TODO annotation & code & test the test
+  # TODO: annotation & code & test the test
   Scenario: (POST /composition/contribution)
 
-  # TODO annotation & code & test the test
+  # FIXME: error demands templateId parameter but Ehrscape API doesn't list templateId as parameter here
   Scenario: (POST /composition/covert/json)
+    Then A xml file Prescription.xml is converted into json
 
-  # TODO test the test
   Scenario: (POST /composition/convert/tdd) Client wants to convert a composition from JSON to XML
     Then A flat json file IDCR - Immunisation summary.v0.flat.json with template id IDCR - Immunisation summary.v0 is converted
 
-  # TODO annotation & code & test the test
+  # TODO: annotation & code & test the test
+  # NOTE: only raw file composition supported - needed as test file
   Scenario: (POST /composition/generated)
 
-  # TODO test the test 
+  # FIXME: fails with 500 - xml error? 
   Scenario: (POST /composition/getByAql [flat])
     When Flat json file IDCR - Immunisation summary.v0.flat.json with template id IDCR - Immunisation summary.v0 is committed to service
     Then Composition id should allow returning of composition by query
 
-  # TODO test the test 
+  # FIXME: fails with 500 - xml error?
   Scenario: (POST /composition/getByUids [flat])
     When Flat json file IDCR - Immunisation summary.v0.flat.json with template id IDCR - Immunisation summary.v0 is committed to service
     Then Composition id should allow returning of composition by id
 
-  # TODO annotation & code & test the test
+  # TODO: annotation & code & test the test
   Scenario: (GET /composition/{uid}/signature)
 
-  # TODO annotation & code & test the test
+  # TODO: annotation & code & test the test
   Scenario: (GET /composition/soa/{uid})
 
-  # TODO code & test the test
   Scenario: (general case PUT  /compositon/{uid} [flat])
     When Flat json file IDCR - Immunisation summary.v0.flat.json with template id IDCR - Immunisation summary.v0 is committed to service
-    Then Composition id should allow update of existing composition
+    Then Composition id should allow update of template with id IDCR - Immunisation summary.v0 from file IDCR - Immunisation summary.v1.flat.json
 
-  # TODO annotation & code & test the test
+  # TODO: annotation & code & test the test
   Scenario: (PUT /composition/{uid}/signature)
 
-  # TODO annotation & code & test the test
+  # TODO: annotation & code & test the test
   Scenario: (PUT /composition/soa/{uid})
