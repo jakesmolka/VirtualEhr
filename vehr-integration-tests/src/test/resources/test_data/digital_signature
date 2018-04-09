@@ -1,0 +1,25 @@
+(PICS-1.1 "http://www.gcf.org/v2.5"
+ by "John Doe"
+ labels
+    for "http://www.w3.org/PICS/DSig/Overview"
+    extension
+      (optional "http://www.w3.org/TR/1998/REC-DSig-label/resinfo-1_0"
+         ("http://www.w3.org/TR/1998/REC-DSig-label/SHA1-1_0" "aba21241241=")
+         ("http://www.w3.org/TR/1998/REC-DSig-label/MD5-1_0" "cdc43463463="
+          "1997-02-05T08:15-0500"))
+    extension
+      (optional "http://www.w3.org/TR/1998/REC-DSig-label/sigblock-1_0"
+         ("AttribInfo"
+            ("http://www.w3.org/PICS/DSig/X509-1_0" "efe64685685=")
+            ("http://www.w3.org/PICS/DSig/X509-1_0"
+             "http://SomeCA/Certs/ByDN/CN=PeterLipp,O=TU-Graz,OU=IAIK")
+            ("http://www.w3.org/PICS/DSig/pgpcert-1_0" "ghg86807807=")
+            ("http://www.w3.org/PICS/DSig/pgpcert-1_0"
+             "http://pgp.com/certstore/plipp@iaik.tu-graz.ac.at"))
+         ("Signature" "http://www.w3.org/TR/1998/REC-DSig-label/RSA-MD5-1_0"
+            ("byKey" (("N" "aba212412412=")
+                      ("E" "3jdg93fj")))
+            ("on" "1996-12-02T22:20-0000")
+            ("SigCrypto" "3j9fsaJ30SD=")))
+    on "1994.11.05T08:15-0500"
+    ratings (suds 0.5 density 0 color 1))

@@ -209,12 +209,26 @@ public class RestAPICompositionSteps {
         assertEquals("Status code not 200; error: " + response.header("x-error-message")+";", 200, response.statusCode());
     }
 
+    // TODO: (POST /composition/soa)
 
-    // TODO: (GET /composition/{uid}/signature)
+    // FIXME: (GET /composition/{uid}/signature)
+    @Then("^Composition id should allow retrieval of signature$")
+    public void compositionIdShouldAllowRetrievalOfSignature() throws Throwable {
+        // needs full uids instead of following, right?
+        //String objectId = compositionUid.substring(0, compositionUid.indexOf("::"));
+
+        Response response =
+            given()
+                .header(bground.secretSessionId, bground.SESSION_ID_TEST_SESSION)
+            .when()
+                .get(COMPOSITION_ENDPOINT + "/"  + compositionUid + "/signature");
+
+        assertEquals("Status code not 200; error: " + response.header("x-error-message")+";", 200, response.statusCode());
+    }
 
     // TODO: (GET /composition/soa/{uid})
 
-    // (general case PUT  /compositon/{uid} [flat])
+    // (PUT  /compositon/{uid} [flat])
     @Then("^Composition id should allow update of template with id ([a-zA-Z \\-\\.0-9]+) from file ([a-zA-Z \\-\\.0-9]+\\.json)$")
     public void compositionIdShouldAllowUpdateOfExistingComposition(String pTemplateId, String pTemplateFile) throws Throwable {
         Path jsonFilePath =
@@ -235,8 +249,42 @@ public class RestAPICompositionSteps {
         assertEquals("Status code not 200; error: " + response.header("x-error-message")+";", 200, response.statusCode());
     }
 
-    // TODO: (PUT /composition/{uid}/signature)
+    // FIXME: (PUT /composition/{uid}/signature)
+    @Then("^Composition id should allow signing with another signature$")
+    public void compositionIdShouldAllowSigningWithAnotherSignature() throws Throwable {
+        Path filePath =
+            Paths
+                .get(bground.resourcesRootPath + "test_data/digital_signature");
+        byte[] fileContents = Files.readAllBytes(filePath);
+        
+        // needs full uids instead of following, right?
+        //String objectId = compositionUid.substring(0, compositionUid.indexOf("::"));
+
+        Response response =
+            given()
+                .header(bground.secretSessionId, bground.SESSION_ID_TEST_SESSION)
+                .header(bground.CONTENT_TYPE, bground.CONTENT_TYPE_PLAIN)
+            .content(fileContents)
+            .when()
+                .put(COMPOSITION_ENDPOINT + "/"  + compositionUid + "/signature");
+
+        assertEquals("Status code not 200; error: " + response.header("x-error-message")+";", 200, response.statusCode());
+    }
 
     // TODO: (PUT /composition/soa/{uid})
 
+    // FIXME: (DELETE /composition/{uid}/signature)
+    @Then("^Composition id should allow removing of signature$")
+    public void compositionIdShouldAllowRemovingOfSignature() throws Throwable {
+        // needs full uids instead of following, right?
+        //String objectId = compositionUid.substring(0, compositionUid.indexOf("::"));
+
+        Response response =
+            given()
+                .header(bground.secretSessionId, bground.SESSION_ID_TEST_SESSION)
+            .when()
+                .delete(COMPOSITION_ENDPOINT + "/"  + compositionUid + "/signature");
+
+        assertEquals("Status code not 200; error: " + response.header("x-error-message")+";", 200, response.statusCode());
+    }
 }

@@ -27,6 +27,7 @@ public class RestAPIBackgroundSteps {
     protected final String ACCEPT = "Accept";
     protected final String CONTENT_TYPE_XML = "application/xml";
     protected final String CONTENT_TYPE_JSON = "application/json";
+    protected final String CONTENT_TYPE_PLAIN = "text/plain";
     protected final String COMPOSITION_UID_PATH_IN_XML = "compositionCreateRestResponseData.compositionUid";
 
     protected Launcher launcher;
