@@ -86,6 +86,8 @@ public class RestAPIQuerySteps {
             .param("aql", buildAqlQuery())
             .get("/rest/v1/query");
 
+        assertEquals("Status code not 200; error: " + response.header("x-error-message")+";", 200, response.statusCode());
+
         List<Map<String,String>> queryResults = response.getBody().jsonPath().getList("resultSet");
         assertNotNull(queryResults);
         assertTrue(queryResults.size() == 1);
@@ -100,8 +102,71 @@ public class RestAPIQuerySteps {
             "contains COMPOSITION a[openEHR-EHR-COMPOSITION.prescription.v1] ";
     }
 
+    // prepare AQL for POST
+    private String buildJsonAqlQuery() {
+        return "{\"aql\":\"" + buildAqlQuery() + "\"}";
+    }
+
     @When("^A composition is persisted under the EHR without an EHR identifier$")
     public void aCompositionIsPersistedUnderTheEHRWithoutAnEHRIdentifier() throws Throwable {
         MakeCallToPersistComposition(false);
+    }
+
+    // (GET /query/csv)
+    @Then("^An AQL query should allow retrieving data as CSV$")
+    public void anAQLQueryShouldAllowRetrievingDataAsCSV() throws Throwable {
+        Response response = given()
+            .header(bacgroundSteps.secretSessionId, bacgroundSteps.SESSION_ID_TEST_SESSION)
+            .param("aql", buildAqlQuery())
+            .get("/rest/v1/query/csv");
+
+        assertEquals("Status code not 200; error: " + response.header("x-error-message")+";", 200, response.statusCode());
+    }
+
+    // TODO: (GET /query/form/{name}/{version})
+
+    // TODO: first POST /query/poll
+    // TODO: (GET /query/poll/{queryUuid)
+
+    // FIXME: (POST /query)
+    @Then("^Querying with named parameter support should work$")
+    public void queryingWithNamedParameterSupportShouldWork() throws Throwable {
+        Response response = 
+            given()
+                .header(bacgroundSteps.secretSessionId, bacgroundSteps.SESSION_ID_TEST_SESSION)
+                .header(bacgroundSteps.CONTENT_TYPE, bacgroundSteps.CONTENT_TYPE_JSON)
+                .body(buildJsonAqlQuery())
+            .when()
+                .post("/rest/v1/query");
+
+        assertEquals("Status code not 200; error: " + response.header("x-error-message")+";", 200, response.statusCode());
+    }
+
+    // FIXME: (POST /query/csv)
+    @Then("^Querying with named parameter support and csv output should work$")
+    public void queryingWithNamedParameterSupportAndCsvOuputShouldWork() throws Throwable {
+        Response response = 
+            given()
+                .header(bacgroundSteps.secretSessionId, bacgroundSteps.SESSION_ID_TEST_SESSION)
+                .header(bacgroundSteps.CONTENT_TYPE, bacgroundSteps.CONTENT_TYPE_JSON)
+                .body(buildJsonAqlQuery())
+            .when()
+                .post("/rest/v1/query/csv");
+
+        assertEquals("Status code not 200; error: " + response.header("x-error-message")+";", 200, response.statusCode());
+    }
+
+    // TODO: (POST /query/poll)
+    @Then("^Submitting a polling query should work$")
+    public void submittingAPollingQueryShouldWork() throws Throwable {
+        Response response = 
+            given()
+                .header(bacgroundSteps.secretSessionId, bacgroundSteps.SESSION_ID_TEST_SESSION)
+                .header(bacgroundSteps.CONTENT_TYPE, bacgroundSteps.CONTENT_TYPE_JSON)
+                .body(buildJsonAqlQuery())
+            .when()
+                .post("/rest/v1/query/poll");
+
+        assertEquals("Status code not 200; error: " + response.header("x-error-message")+";", 200, response.statusCode());
     }
 }
