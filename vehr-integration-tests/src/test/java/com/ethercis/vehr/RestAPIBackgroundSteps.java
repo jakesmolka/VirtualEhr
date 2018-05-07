@@ -58,7 +58,7 @@ public class RestAPIBackgroundSteps {
 
     public RestAPIBackgroundSteps(){
         RestAssured.baseURI = "http://localhost";
-        RestAssured.port = 8080;
+        RestAssured.port = 8081;
 
         //session id for ethercis sessions
         secretSessionId =
@@ -87,7 +87,7 @@ public class RestAPIBackgroundSteps {
             "-java_util_logging_config_file", resourcesRootPath + "config/logging.properties",
             "-servicesFile", resourcesRootPath + "config/services.xml",
             "-dialect", "EHRSCAPE",
-            "-server_port", "8080",
+            "-server_port", "8081",
             "-server_host", "localhost",
             "-debug", "true"
         });
